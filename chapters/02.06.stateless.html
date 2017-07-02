@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custom component</title>
+</head>
+<body>
+  <div id="app">
+    <!-- my app renders here -->
+  </div>
+  <script src="react/react.js"></script>
+  <script src="react/react-dom.js"></script>
+  <script src="babel/browser.js"></script>
+  <script type="text/babel">
+    class TextAreaCounter extends React.Component {
+      render() {
+        return (
+          <div>
+            <textarea value={this.props.text}></textarea>
+            <h3>{this.props.text.length}</h3>
+          </div>
+        );
+      }
+    }
+    TextAreaCounter.defaultProps = {
+      text: ''
+    }
+    ReactDOM.render(
+      <TextAreaCounter text="ボブ" />,
+      document.getElementById('app')
+    );
+  </script>
+</body>
+</html>

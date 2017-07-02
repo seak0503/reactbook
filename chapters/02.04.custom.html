@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custom component</title>
+</head>
+<body>
+  <div id="app">
+    <!-- my app renders here -->
+  </div>
+  <script src="react/react.js"></script>
+  <script src="react/react-dom.js"></script>
+  <script src="babel/browser.js"></script>
+  <script type="text/babel">
+    class Component extends React.Component {
+      render() {
+        return (
+          <span>私は{this.props.name}です。</span>
+        );
+      }
+    }
+    ReactDOM.render(
+      <Component name="ボブ" />,
+      document.getElementById('app')
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom component</title>
+  <meta charset="utf-8"></meta>
+</head>
+<body>
+  <div id="app">
+    <!-- my app renders here -->
+  </div>
+  <script src="react/react.js"></script>
+  <script src="react/react-dom.js"></script>
+  <script src="babel/browser.js"></script>
+  <script type="text/babel">
+    class Component extends React.Component {
+      render() {
+        return (
+          <span>ノコギリクワガタ</span>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <Component />,
+      document.getElementById('app')
+    );
+  </script>
+</body>
+</html>
