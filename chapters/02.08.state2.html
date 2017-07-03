@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custom component</title>
+</head>
+<body>
+  <div id="app">
+    <!-- my app renders here -->
+  </div>
+  <script src="react/react.js"></script>
+  <script src="react/react-dom.js"></script>
+  <script src="babel/browser.js"></script>
+  <script type="text/babel">
+    class TextAreaCounter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {text: this.props.defaultValue};
+        this._textChange = this._textChange.bind(this);
+      }
+
+      _textChange(ev) {
+        this.setState({text: ev.target.value});
+      }
+
+      render() {
+        return (
+          <div>
+            <textarea value={this.state.text} onChange={this._textChange} />
+            <h3>{this.state.text.length}</h3>
+          </div>
+        );
+      }
+    }
+    TextAreaCounter.defaultProps = {
+      text: ''
+    }
+    ReactDOM.render(
+      <TextAreaCounter defaultValue="Bob" />,
+      document.getElementById('app')
+    );
+  </script>
+</body>
+</html>
