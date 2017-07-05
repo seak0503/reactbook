@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custom component</title>
+</head>
+<body>
+  <div id="app">
+    <!-- my app renders here -->
+  </div>
+  <script src="react/react.js"></script>
+  <script src="react/react-dom.js"></script>
+  <script src="babel/browser.js"></script>
+  <script type="text/babel">
+    class Counter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.name = 'Counter';
+        this.render = this.render.bind(this);
+      }
+      _log(methodName, args) {
+        console.log(methodName, args);
+      }
+
+      componentWillMount() {
+        this._log('Counter componentWillMount', arguments);
+      }
+
+      componentDidMount() {
+        this._log('Counter componentDidMount', arguments);
+      }
+
+      componentWillUnmount() {
+        this._log('Counter componentWillUnmount', arguments);
+      }
+
+      componentWillReceiveProps(newProps) {
+        this._log('Counter componentWillReceiveProps', arguments);
+        this._log('newProps: ', newProps);
+      }
+
+      shouldComponentUpdate(newProps, newState) {
+        this._log('Counter shouldComponentUpdate', arguments);
+        this._log('newProps: ', newProps);
+        this._log('newState: ', newState);
+        return true;
+      }
+
+      componentWillUpdate(newProps, newState) {
+        this._log('Counter componentWillUpdate', arguments);
+        this._log('newProps: ', newProps);
+        this._log('newState: ', newState);
+      }
+
+      componentDidUpdate(oldProps, oldState) {
+        this._log('Counter componentDidUpdate', arguments);
+        this._log('oldProps: ', oldProps);
+        this._log('oldState: ', oldState);
+      }
+      render() {
+        console.log(`${this.name} ::render()`);
+        return (
+          <h3>{this.props.count}</h3>
+        );
+      }
+    }
+
+    class TextAreaCounter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.name = 'TextAreaCounter'
+        this.state = {text: this.props.defaultValue};
+        this._textChange = this._textChange.bind(this);
+        this.render = this.render.bind(this);
+      }
+
+      _log(methodName, args) {
+        console.log(methodName, args);
+      }
+
+      componentWillMount() {
+        this._log('TextAreaCounter componentWillMount', arguments);
+      }
+
+      componentDidMount() {
+        this._log('TextAreaCounter componentDidMount', arguments);
+      }
+
+      componentWillUnmount() {
+        this._log('TextAreaCounter componentWillUnmount', arguments);
+      }
+
+      componentWillReceiveProps() {
+        this._log('TextAreaCounter componentWillReceiveProps', arguments);
+      }
+
+      shouldComponentUpdate(newProps, newState) {
+        this._log('TextAreaCounter shouldComponentUpdate', arguments);
+        this._log('newProps: ', newProps);
+        this._log('newState: ', newState);
+        return true;
+      }
+
+      componentWillUpdate(newProps, newState) {
+        this._log('TextAreaCounter componentWillUpdate', arguments);
+        this._log('newProps: ', newProps);
+        this._log('newState: ', newState);
+      }
+
+      componentDidUpdate(oldProps, oldState) {
+        this._log('TextAreaCounter componentDidUpdate', arguments);
+        this._log('oldProps: ', oldProps);
+        this._log('oldState: ', oldState);
+      }
+
+      _textChange(ev) {
+        this.setState({text: ev.target.value});
+      }
+
+      render() {
+        console.log(`${this.name} ::render()`);
+        let counter = null;
+        if (this.state.text.length > 0) {
+          counter = <Counter count={this.state.text.length} />
+        }
+        return (
+          <div>
+            <textarea value={this.state.text} onChange={this._textChange} />
+            {counter}
+          </div>
+        );
+      }
+    }
+    TextAreaCounter.defaultProps = {
+      text: ''
+    }
+    ReactDOM.render(
+      <TextAreaCounter defaultValue="Bob" />,
+      document.getElementById('app')
+    );
+  </script>
+</body>
+</html>
